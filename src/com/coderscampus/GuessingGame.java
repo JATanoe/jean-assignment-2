@@ -5,14 +5,13 @@ import java.util.Scanner;
 
 public class GuessingGame {
 
-	Random random;
-	Scanner scanner;
+	private Random random;
+	private Scanner scanner;
 	
-	int number_to_guess; // Store the generated random number
-	int max_number_tries = 5; // Stores the player's maximum number of tries left
-	boolean isGameOver = false;
-	String input; // Store the player's typed number
-	Integer guess;	// Store the player's guess converted to "int"
+	private int numberToGuess; // Store the generated random number
+	private int maxNumberTries = 5; // Stores the player's maximum number of tries left
+	private boolean isGameOver = false;
+	private Integer guess;	// Store the player's guess converted to "int"
 	
 	// Initialize the class
 	public GuessingGame() {
@@ -24,7 +23,7 @@ public class GuessingGame {
 	 * Method that generates a random number
 	 */
 	private void generateRandomNumber() {
-		this.number_to_guess = this.random.nextInt(100) + 1;	
+		this.numberToGuess = this.random.nextInt(100) + 1;	
 	}
 
 	/**
@@ -32,8 +31,7 @@ public class GuessingGame {
 	 */
 	private void getInput() {
 		System.out.print("Pick a number between 1 and 100 ");
-		this.input = this.scanner.next();
-		this.guess = Integer.parseInt(this.input);	
+		this.guess = Integer.parseInt(this.scanner.next());	
 	}
 
 	/**
@@ -48,7 +46,7 @@ public class GuessingGame {
 		while (!this.isGameOver) {
 			
 			// Break out of the loop if the max_number_tries is lower than 1
-			if (this.max_number_tries == 0) {
+			if (this.maxNumberTries == 0) {
 				break;
 			}
 		
@@ -56,7 +54,7 @@ public class GuessingGame {
 			this.getInput();
 			
 			// If in the range, check if the user won and terminate the game
-			if (this.guess == this.number_to_guess) {
+			if (this.guess == this.numberToGuess) {
 				this.isGameOver = true;
 				break;
 			}
@@ -66,11 +64,11 @@ public class GuessingGame {
 			// and update the number of tries left
 			if (this.guess < 1 || this.guess > 100) {
 				System.out.println("Your guess is not between 1 and 100, please try again.");		
-			} else if (this.guess < this.number_to_guess) {
-				this.max_number_tries--;	
+			} else if (this.guess < this.numberToGuess) {
+				this.maxNumberTries--;	
 				System.out.println("Please pick a higher number");
-			} else if (this.guess > this.number_to_guess) {
-				this.max_number_tries--;	
+			} else if (this.guess > this.numberToGuess) {
+				this.maxNumberTries--;	
 				System.out.println("Please pick a lower number");				
 			} 
 			
@@ -82,9 +80,9 @@ public class GuessingGame {
 		}
 		
 		// Once the number of tries reaches zero then the game is over 
-		if (this.max_number_tries == 0) {
+		if (this.maxNumberTries == 0) {
 			System.out.println("You lose!");		
-			System.out.println("The number to guess was: " + this.number_to_guess);		
+			System.out.println("The number to guess was: " + this.numberToGuess);		
 		}
 		
 		scanner.close();
